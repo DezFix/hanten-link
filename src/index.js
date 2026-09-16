@@ -171,6 +171,7 @@ function humanPage(meta, ref) {
 		`@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}` +
 		`.cover{max-width:300px;width:100%;border-radius:16px;box-shadow:0 14px 40px rgba(0,0,0,.5)}` +
 		`.icon{width:84px;height:84px;border-radius:22px;box-shadow:0 12px 34px rgba(224,104,92,.35)}` +
+		`.cover{max-width:300px;width:100%;border-radius:16px;box-shadow:0 14px 40px rgba(0,0,0,.5);margin-bottom:10px}` +
 		`h1{font-size:22px;margin:18px 0 6px}.sub{color:var(--muted);font-size:14px;margin:0 0 14px}` +
 		`.desc{color:var(--muted);font-size:14px;line-height:1.6;margin:0 0 22px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}` +
 		`.btn{display:block;padding:15px;border-radius:14px;text-decoration:none;font-weight:700;margin:10px 0;transition:transform .18s ease}` +
@@ -182,9 +183,7 @@ function humanPage(meta, ref) {
 		`.kofi{display:block;padding:15px;border-radius:14px;text-decoration:none;font-weight:700;margin:10px 0;background:#ff5e5b;color:#fff;transition:transform .18s ease}` +
 		`.kofi:hover{transform:translateY(-2px)}</style></head><body>` +
 		`<div class="wrap">` +
-		(meta.cover
-			? `<img class="cover" src="${esc(meta.cover)}" alt="">`
-			: `<img class="icon" src="${ICON}" alt="Hanten">`) +
+		`<img id="art" class="${meta.cover ? "cover" : "icon"}" src="${esc(meta.cover || ICON)}" alt="" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='${ICON}';this.className='icon'">` +
 		`<h1>${esc(title)}</h1>` +
 		(ref.source ? `<p class="sub">Источник: ${esc(ref.source)}</p>` : "") +
 		(meta.desc ? `<p class="desc">${esc(meta.desc.slice(0, 400))}</p>` : "") +
