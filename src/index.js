@@ -32,15 +32,23 @@ export default {
 		const rel = q.get("u") || q.get("url") || "";
 		const pub = q.get("p") || q.get("publicUrl") || "";
 		const fallbackName = q.get("n") || q.get("name") || "";
+		const fallbackCover = q.get("c") || q.get("cover") || "";
 
 		const target = pub || (MIRRORS[source] && rel ? MIRRORS[source] + rel : null);
-		const meta = target ? await getMeta(request, target, fallbackName) : { title: fallbackName, cover: null, desc: null };
+		const fetched = target ? await getMeta(request, target, fallbackName) : null;
+		const meta = {
+			title: (fetched && fetched.title) || fallbackName || null,
+			cover: (fetched && fetched.cover) || absUrl(fallbackCover, target) || null,
+			desc: (fetched && fetched.desc) || null,
+			tags: (fetched && fetched.tags) || [],
+		};
+		const sourceUrl = pub || (MIRRORS[source] && rel ? MIRRORS[source] + rel : null);
 
 		const ua = request.headers.get("User-Agent") || "";
 		if (BOT_RE.test(ua)) {
 			return botPage(url, meta);
 		}
-		return humanPage(meta, { source, rel, pub });
+		return humanPage(meta, { source, rel, pub: sourceUrl });
 	},
 };
 
