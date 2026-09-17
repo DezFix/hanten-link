@@ -48,7 +48,10 @@ export default {
 			desc: (fetched && fetched.desc) || null,
 			tags: (fetched && fetched.tags) || [],
 		};
-		const sourceUrl = pub || (MIRRORS[source] && rel ? MIRRORS[source] + rel : null);
+		const domain = q.get("d") || "";
+		const sourceUrl = pub
+			|| (domain && rel ? "https://" + domain + (rel.charAt(0) === "/" ? "" : "/") + rel : null)
+			|| (MIRRORS[source] && rel ? MIRRORS[source] + rel : null);
 
 		const ua = request.headers.get("User-Agent") || "";
 		if (BOT_RE.test(ua)) {
