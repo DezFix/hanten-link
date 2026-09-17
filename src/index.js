@@ -5,8 +5,14 @@
  */
 
 const MIRRORS = {
-	// test set; extend with primary mirrors per source as needed
+	// primary mirrors per source; extend as needed
 	COMX: "https://com-x.life",
+	READMANGA_RU: "https://readmanga.me",
+	MINTMANGA: "https://2.mintmanga.one",
+	SELFMANGA: "https://1.selfmanga.live",
+	SEIMANGA: "https://1.seimanga.me",
+	ALLHENTAI: "https://20.allhen.online",
+	REMANGA: "https://remanga.org",
 };
 
 const BOT_RE =
